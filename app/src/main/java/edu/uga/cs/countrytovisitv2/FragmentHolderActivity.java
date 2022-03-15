@@ -5,6 +5,8 @@ import android.app.FragmentTransaction;
 import android.content.res.Configuration;
 import android.icu.text.IDNA;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +24,7 @@ public class FragmentHolderActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             setContentView(R.layout.fragment_holder);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
             if(getIntent().getExtras() != null) {
                 FragmentManager fm = getFragmentManager();
@@ -32,5 +35,22 @@ public class FragmentHolderActivity extends AppCompatActivity {
                 ft.commit();
             }
         }
+    }
+
+    //Used for the back button
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    //Used for the back button
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
     }
 }
