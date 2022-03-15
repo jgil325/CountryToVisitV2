@@ -1,0 +1,6 @@
+Places to Visit - Paris -> Eiffel Tower, Musée du Louvre,
+    Notre-Dame Cathedral
+Language - French
+Currency - Euro
+Exchange Rate - 0.88 Euro to 1 USD
+Transportation - Taxi, Car, Train, Plane
