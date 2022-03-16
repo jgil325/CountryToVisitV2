@@ -11,7 +11,8 @@ import androidx.fragment.app.Fragment;
 
 import java.io.InputStream;
 
-
+//Fragment containing all the country information, and depending on which
+//index was selected, it will show the associated info
 public class InfoFragment extends Fragment {
     String country;
     TextView detailTextView, mainTextView;
@@ -24,10 +25,10 @@ public class InfoFragment extends Fragment {
 
     public static InfoFragment newInstance( int index ) {
 
-        // this uses the default constructor (not defined in this class, but Java-supplied)
+        // this uses the default constructor
         InfoFragment fragment = new InfoFragment();
 
-        // save the selected list versionIndex in the new fragment's Bundle data
+        // save the selected country/index in the new fragment's Bundle data
         Bundle args = new Bundle();
         args.putInt( "index", index );
         fragment.setArguments( args );
@@ -37,6 +38,7 @@ public class InfoFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
+        //Creates a new view instance with the correct info
         View myFragmentView = inflater.inflate(R.layout.info_fragment_layout, container, false);
 
         detailTextView = (TextView) myFragmentView.findViewById(R.id.detail_text);
@@ -53,6 +55,7 @@ public class InfoFragment extends Fragment {
         return myFragmentView;
     }
 
+    //Calls the correct method to read text and set images depending on which country was selected
     public void showSelectedCountry(String country) {
         try {
             if (country.equals("Colombia")) {
@@ -74,12 +77,13 @@ public class InfoFragment extends Fragment {
             mainTextView.setText(new String(main));
         } catch (Exception e) {
             detailTextView.setText( "Error: can't show info text." );
-//            System.out.println("-------------------------------------------------------");
-//            System.out.println("NOT WORKING");
-//            System.out.println("-------------------------------------------------------");
+/*           System.out.println("-------------------------------------------------------");
+            System.out.println("NOT WORKING");
+            System.out.println("-------------------------------------------------------"); */
         }
     }
 
+    //Sets the correct country name based on the index of the list item that was selected
     public void setCountry(int index) {
         if (index == 0) {
             country="Colombia";

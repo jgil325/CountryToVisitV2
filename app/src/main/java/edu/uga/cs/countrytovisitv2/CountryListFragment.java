@@ -13,6 +13,7 @@ import androidx.fragment.app.ListFragment;
 
 public class CountryListFragment extends ListFragment {
 
+    //holds the array of countries that can be selected
     private String[] countries;
 
     // indicate if this is a landscape mode with both fragments present or not
@@ -21,18 +22,18 @@ public class CountryListFragment extends ListFragment {
     // list selection index
     int countryIndex = 0;
 
-
     public CountryListFragment() {
         // required default constructor
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-
         super.onViewCreated(view, savedInstanceState);
 
+        //get the countries from res
         countries = getResources().getStringArray(
                 R.array.countries);
+        //set them to an adapter
         setListAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_activated_1, countries));
 
         View detailsFrame = getActivity().findViewById(R.id.countryInfo);
@@ -46,6 +47,7 @@ public class CountryListFragment extends ListFragment {
         getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         getListView().setItemChecked(countryIndex, true);
 
+        //if landscape show both
         if (twoFragmentsActivity) {
             showCountryInfo(countryIndex);
 
@@ -54,6 +56,7 @@ public class CountryListFragment extends ListFragment {
 
     }
 
+    //when an country is clicked, set the information to that of the country
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         showCountryInfo(position);
@@ -67,6 +70,8 @@ public class CountryListFragment extends ListFragment {
         outState.putInt("countrySelection", countryIndex);
     }
 
+    //Show the info on the selected country, if landscape, update the info fragment,
+    //if portrait, replace the list fragment with the info fragment of the selected country
     void showCountryInfo(int index) {
 
         this.countryIndex = index;

@@ -8,7 +8,9 @@ import android.view.MenuItem;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-
+//Activity only used if portrait.
+//When the list is selected, it replaces the list fragment with the info fragment
+//and makes sure to pass along the selected country information
 public class CountryInfoActivity extends AppCompatActivity {
 
     @Override
@@ -36,10 +38,8 @@ public class CountryInfoActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Implement Back button listener method.
-        // This method may be used for other actions from the ActionBar menu, if provided in the layout.
         int id = item.getItemId();
 
-        // android.R.id.home is the built-in designation of the back button widget.
         if( id == android.R.id.home ) {
             onBackPressed();
             return true;

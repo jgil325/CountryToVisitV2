@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.InputStream;
 
+//This Activity will be simple: It will have an introduction to the app and
+//have a button that takes you to the functional component that is holding the fragments
 public class MainActivity extends AppCompatActivity {
     TextView splashText;
     Button splashButton;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         splashButton = findViewById(R.id.splashButton);
         readText = getResources().openRawResource(R.raw.splash_text);
 
+        //Read the welcome message from a text file instead of hard coding it here
         try {
             byte[] b = new byte[readText.available()];
             readText.read(b);
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         splashButton.setOnClickListener(new ButtonClickSplash());
     }
 
+    //Button click should send us to the activity where the fragments are held
     private class ButtonClickSplash implements
             View.OnClickListener {
         @Override

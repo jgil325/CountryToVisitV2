@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+//This Activity simply holds the fragments -- fragments cannot exist alone
 public class FragmentHolderActivity extends AppCompatActivity {
 
     @Override
