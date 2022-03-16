@@ -9,6 +9,7 @@ public class FragmentHolderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_holder);
+
+        setContentView(R.layout.fragment_display);
     }
 }

@@ -21,6 +21,9 @@
         <activity
             android:name=".FragmentHolderActivity"
             android:exported="true"/>
+        <activity
+            android:name=".CountryInfoActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>
