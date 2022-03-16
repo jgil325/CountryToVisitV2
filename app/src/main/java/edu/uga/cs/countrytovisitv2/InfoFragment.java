@@ -1,14 +1,12 @@
 package edu.uga.cs.countrytovisitv2;
 
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import java.io.InputStream;
@@ -16,20 +14,14 @@ import java.io.InputStream;
 
 public class InfoFragment extends Fragment {
     String country;
-    TextView textView;
-    InputStream readText;
+    TextView detailTextView, mainTextView;
+    ImageView imageView1, imageView2;
+    InputStream readDetailText, readMainText;
 
-    public InfoFragment()
-    {
+    public InfoFragment() {
         // required default constructor
     }
 
-    // This method is similar to the Factory Method design pattern
-    // to create new instances of this fragment.
-    // There is a specific reason for having this method, though.  We want to send some data (VersionIndex, here) into the
-    // new fragment.  Android disallows overloaded constructors for fragments, and so we can't create a Fragment with
-    // the versionIndex as argument.  But we can use the Bundle and send the data this way.  Also, the setArguments call
-    // must happen BEFORE the fragment is attached an activity.
     public static InfoFragment newInstance( int index ) {
 
         // this uses the default constructor (not defined in this class, but Java-supplied)
@@ -45,19 +37,12 @@ public class InfoFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
-        // Programmatically, create a scrollable TextView to show the Android version information
-        ScrollView scroller = new ScrollView( getActivity()) ;
-        textView = new TextView( getActivity() );
-        scroller.addView( textView );
+        View myFragmentView = inflater.inflate(R.layout.info_fragment_layout, container, false);
 
-        // Set the padding for the new TextView
-        // These padding attributes are normally defined in the XML file
-        // here, they are set programmatically.
-        int padding = (int) TypedValue.applyDimension( TypedValue.COMPLEX_UNIT_DIP, 12, getActivity().getResources().getDisplayMetrics() );
-        textView.setPadding( padding, padding, padding, padding );
-
-        // set the text size
-        textView.setTextSize( TypedValue.COMPLEX_UNIT_SP, 18f );
+        detailTextView = (TextView) myFragmentView.findViewById(R.id.detail_text);
+        mainTextView = (TextView) myFragmentView.findViewById(R.id.main_info_text);
+        imageView1 = (ImageView) myFragmentView.findViewById(R.id.img1);
+        imageView2 = (ImageView) myFragmentView.findViewById(R.id.img2);
 
         setCountry(getShownVersionIndex());
 //        System.out.println("-------------------------------------------------------");
@@ -65,7 +50,7 @@ public class InfoFragment extends Fragment {
 //        System.out.println("-------------------------------------------------------");
         showSelectedCountry(country);
 
-        return scroller;
+        return myFragmentView;
     }
 
     public void showSelectedCountry(String country) {
@@ -81,11 +66,17 @@ public class InfoFragment extends Fragment {
             } else if (country.equals("France")) {
                 setFrance();
             }
-            byte[] b = new byte[readText.available()];
-            readText.read(b);
-            textView.setText(new String(b));
+            byte[] b = new byte[readDetailText.available()];
+            readDetailText.read(b);
+            detailTextView.setText(new String(b));
+            byte[] main = new byte[readMainText.available()];
+            readMainText.read(main);
+            mainTextView.setText(new String(main));
         } catch (Exception e) {
-            textView.setText( "Error: can't show info text." );
+            detailTextView.setText( "Error: can't show info text." );
+//            System.out.println("-------------------------------------------------------");
+//            System.out.println("NOT WORKING");
+//            System.out.println("-------------------------------------------------------");
         }
     }
 
@@ -106,39 +97,45 @@ public class InfoFragment extends Fragment {
     public int getShownVersionIndex() {
         return getArguments().getInt("index", 0 );
     }
+
     //---------------------------Set images and text file to be read depending on country
     public void setColombia() {
-        readText = getResources().openRawResource(R.raw.colombia_details);
-//        imageView1.setImageResource(R.drawable.col_uber);
-//        imageView2.setImageResource(R.drawable.col_med);
+        readMainText = getResources().openRawResource(R.raw.colombia);
+        readDetailText = getResources().openRawResource(R.raw.colombia_details);
+        imageView1.setImageResource(R.drawable.col_flag);
+        imageView2.setImageResource(R.drawable.col_med);
     }
 
     //---------------------------Set images and text file to be read depending on country
     public void setVenezuela() {
-        readText = getResources().openRawResource(R.raw.venezuela_details);
-//        imageView1.setImageResource(R.drawable.ven_1);
-//        imageView2.setImageResource(R.drawable.ven_2);
+        readMainText = getResources().openRawResource(R.raw.venezuela);
+        readDetailText = getResources().openRawResource(R.raw.venezuela_details);
+        imageView1.setImageResource(R.drawable.ven_flag);
+        imageView2.setImageResource(R.drawable.ven_2);
     }
 
     //---------------------------Set images and text file to be read depending on country
     public void setMexico() {
-        readText = getResources().openRawResource(R.raw.mexico_details);
-//        imageView1.setImageResource(R.drawable.mex_1);
-//        imageView2.setImageResource(R.drawable.mex_2);
+        readMainText = getResources().openRawResource(R.raw.mexico);
+        readDetailText = getResources().openRawResource(R.raw.mexico_details);
+        imageView1.setImageResource(R.drawable.mex_flag);
+        imageView2.setImageResource(R.drawable.mex_2);
     }
 
     //---------------------------Set images and text file to be read depending on country
     public void setSpain() {
-        readText = getResources().openRawResource(R.raw.spain_details);
-//        imageView1.setImageResource(R.drawable.spain_1);
-//        imageView2.setImageResource(R.drawable.spain_2);
+        readMainText = getResources().openRawResource(R.raw.spain);
+        readDetailText = getResources().openRawResource(R.raw.spain_details);
+        imageView1.setImageResource(R.drawable.spain_flag);
+        imageView2.setImageResource(R.drawable.spain_2);
     }
 
     //---------------------------Set images and text file to be read depending on country
     public void setFrance() {
-        readText = getResources().openRawResource(R.raw.france_details);
-//        imageView1.setImageResource(R.drawable.france_1);
-//        imageView2.setImageResource(R.drawable.france_2);
+        readMainText = getResources().openRawResource(R.raw.france);
+        readDetailText = getResources().openRawResource(R.raw.france_details);
+        imageView1.setImageResource(R.drawable.france_flag);
+        imageView2.setImageResource(R.drawable.france_2);
     }
 
 
