@@ -42,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick( View view ) {
 //            System.out.println("I WAS CLICKED");
-//            Intent intent = new Intent( view.getContext(), FragmentHolderActivity.class );
+            Intent intent = new Intent( view.getContext(), FragmentHolderActivity.class );
 //            intent.putExtra("CurrentCountry",currentCountry);
-//            startActivity( intent );
+            startActivity( intent );
         }
     }
 
