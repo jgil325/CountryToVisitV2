@@ -30,21 +30,20 @@ public class MainActivity extends AppCompatActivity {
             readText.read(b);
             splashText.setText(new String(b));
         } catch (Exception e) {
-            splashText.setText( "Error: can't show info text." );
+            splashText.setText("Error: can't show info text.");
         }
 
         splashButton.setOnClickListener(new ButtonClickSplash());
     }
 
     private class ButtonClickSplash implements
-            View.OnClickListener
-    {
+            View.OnClickListener {
         @Override
-        public void onClick( View view ) {
+        public void onClick(View view) {
 //            System.out.println("I WAS CLICKED");
-            Intent intent = new Intent( view.getContext(), FragmentHolderActivity.class );
+            Intent intent = new Intent(view.getContext(), FragmentHolderActivity.class);
 //            intent.putExtra("CurrentCountry",currentCountry);
-            startActivity( intent );
+            startActivity(intent);
         }
     }
 
